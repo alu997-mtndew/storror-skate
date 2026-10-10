@@ -1,0 +1,50 @@
+{
+  "_note": "Draft design sheets. Only cells the user stated are filled. null = unfilled / not yet verified against the installed game. Preflight = list every null and every unresolved reference before building.",
+  "scope": {
+    "players": "solo",
+    "multiplayer": false,
+    "startState": "on foot as the STORROR parkour character; skateboard is an extra close at hand",
+    "v1MustHave": ["jump", "climb", "vault"]
+  },
+  "games": [
+    {
+      "id": "skate",
+      "role": "primary",
+      "meltySlug": "skate",
+      "engine": "other (per Melty)",
+      "meltyLoader": null,
+      "version": null,
+      "installPath": null,
+      "providesToMashup": ["locations", "spots", "world"]
+    },
+    {
+      "id": "storror",
+      "role": "companion",
+      "meltySlug": null,
+      "engine": null,
+      "meltyLoader": null,
+      "version": null,
+      "installPath": null,
+      "providesToMashup": ["character", "animations", "controls"],
+      "note": "Not in Melty's catalog; find its custom- slug with search_games. Content is read from the player's own folder via {game:<slug>}, never shipped."
+    }
+  ],
+  "abilities": [
+    {"id": "locomotion", "v1": "prerequisite", "sourceGame": "storror", "animationAssets": null, "inputBinding": null, "stateHook": null, "status": "unverified"},
+    {"id": "jump",       "v1": true,  "sourceGame": "storror", "animationAssets": null, "inputBinding": null, "stateHook": null, "status": "unverified"},
+    {"id": "climb",      "v1": true,  "sourceGame": "storror", "animationAssets": null, "inputBinding": null, "stateHook": null, "status": "unverified"},
+    {"id": "vault",      "v1": true,  "sourceGame": "storror", "animationAssets": null, "inputBinding": null, "stateHook": null, "status": "unverified"},
+    {"id": "board_mount_dismount", "v1": false, "sourceGame": "skate", "animationAssets": null, "inputBinding": null, "stateHook": null, "status": "later"}
+  ],
+  "hooks": [
+    {"id": "spawn_on_foot",  "game": "skate", "mechanism": null, "status": "unverified"},
+    {"id": "world_collision_for_spots", "game": "skate", "mechanism": null, "status": "unverified"},
+    {"id": "camera",         "game": "skate", "mechanism": null, "status": "unverified"},
+    {"id": "input",          "game": "skate", "mechanism": null, "status": "unverified"},
+    {"id": "load_storror_character_and_anims", "game": "storror", "mechanism": null, "status": "unverified", "risk": "engines of the two games may differ; check first"}
+  ],
+  "references": [
+    {"from": "abilities.*.animationAssets", "to": "games.storror files", "resolved": false},
+    {"from": "hooks.*", "to": "games.skate runtime", "resolved": false}
+  ]
+}
